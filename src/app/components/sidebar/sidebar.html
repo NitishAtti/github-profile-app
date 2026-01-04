@@ -1,0 +1,44 @@
+<div class="profile-container" *ngIf="userData$ | async as userData; else loading">
+    <div class="avatar-container">
+        <img [src]="userData.avatar_url" alt="Profile Picture" class="avatar-img">
+    </div>
+
+    <div class="names-container">
+        <h1 class="fullname">{{ userData.name }}</h1>
+        <h2 class="username">{{ userData.login }}</h2>
+    </div>
+
+    <div class="bio-container">
+        <button class="follow-btn">Follow</button>
+        <p class="bio">{{ userData.bio }}</p>
+    </div>
+
+    <div class="stats">
+        <span><strong>{{ userData.followers }}</strong> followers</span> ·
+        <span><strong>{{ userData.following }}</strong> following</span>
+    </div>
+
+    <div class="user-details-list">
+        <div class="detail-item" >
+            <span class="icon">🏢</span> <strong>{{ userData.company }}</strong>
+        </div>
+        <div class="detail-item" >
+            <span class="icon">📍</span> {{ userData.location }}
+        </div>
+        <div class="detail-item" >
+            <span class="icon">✉️</span> <a [href]="'mailto:' + userData.email">{{ userData.email }}</a>
+        </div>
+        <div class="detail-item" >
+            <span class="icon">🔗</span> <a [href]="userData.blog" target="_blank">{{ userData.blog }}</a>
+        </div>
+        <div class="detail-item">
+            <span class="icon">🐦</span> @{{ userData.twitter_username }}
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <div class="loading-state">
+        <p>Loading profile...</p>
+    </div>
+</ng-template>
